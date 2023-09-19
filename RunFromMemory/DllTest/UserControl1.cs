@@ -21,15 +21,10 @@ namespace DllTest
         {
 
         }
+
         /*
          PUBLIC METHOD
          */
-        public string RunTestDll()
-        {
-            MessageBox.Show("Dll start OK");
-            return "OK 1";
-        }
-
         public string RunTestDll(string a, string b)
         {
             MessageBox.Show("Dll start OK");
