@@ -73,7 +73,7 @@ namespace RunFromMemory
 
         private void buttonLoadExeFromWeb_Click(object sender, EventArgs e)
         {
-            string exeurl = "https://github.com/CamPro/RunFromMemory/raw/main/RunFromMemory/ExeTest/bin/Release/ExeTest.exe";
+            string exeurl = "https://github.com/CamPro/RunFromMemory/raw/main/RunFromMemory/ExeNoFormTest/bin/Release/ExeNoFormTest.exe";
             MemoryStream ms = new MemoryStream();
             //Access web and read the bytes from the binary file
             ms = new MemoryStream(client.DownloadData(exeurl));
@@ -90,7 +90,13 @@ namespace RunFromMemory
 
         private void buttonLoadDllFromLocal_Click(object sender, EventArgs e)
         {
+            string exepath = "..\\..\\..\\DllTest\\bin\\Release\\DllTest.dll";
+            exepath = Path.GetFullPath(exepath);
 
+            Assembly a = Assembly.LoadFile(exepath);
+            Type programType = a.GetTypes().FirstOrDefault(c => c.Name == "UserControl1");
+            MethodInfo method = programType.GetMethod("RunTestStaticDll", BindingFlags.Public | BindingFlags.Static);
+            method.Invoke(null, new object[] { });
         }
 
         private void buttonLoadExeFromLocal_Click(object sender, EventArgs e)
@@ -99,7 +105,6 @@ namespace RunFromMemory
             exepath = Path.GetFullPath(exepath);
 
             Assembly a = Assembly.LoadFile(exepath);
-
             Type programType = a.GetTypes().FirstOrDefault(c => c.Name == "Program");
             MethodInfo method = programType.GetMethod("Start", BindingFlags.Public | BindingFlags.Static);
             method.Invoke(null, new object[] { });
@@ -117,8 +122,8 @@ namespace RunFromMemory
             br.Close();
 
             Assembly a = Assembly.Load(bin);
-            MethodInfo m = a.EntryPoint;
             a.EntryPoint.Invoke(null, new object[] { });
         }
+
     }
 }
