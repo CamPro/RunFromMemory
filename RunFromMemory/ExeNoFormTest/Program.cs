@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ExeTest
+namespace ExeNoFormTest
 {
     static class Program
     {
@@ -14,15 +14,7 @@ namespace ExeTest
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-        }
-
-        public static void Start()
-        {
-            MessageBox.Show("Start method OK");
-            //Application.Run(new Form1());
+            MessageBox.Show("Exe No Form Start OK");
         }
     }
 }

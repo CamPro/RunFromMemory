@@ -40,7 +40,7 @@ namespace RunFromMemory
             ms.Close();
             br.Close();
 
-            // First load the assembly
+            // load assembly
             Assembly a = Assembly.Load(bin);
             Type class1Typetype = a.GetType("DllTest.UserControl1");
             object class1Instance = Activator.CreateInstance(class1Typetype);
@@ -61,7 +61,7 @@ namespace RunFromMemory
             ms.Close();
             br.Close();
 
-            // First load the assembly
+            // load assembly
             Assembly a = Assembly.Load(bin);
             Type class1Typetype = a.GetType("DllTest.UserControl1");
             object class1Instance = Activator.CreateInstance(class1Typetype);
@@ -73,7 +73,19 @@ namespace RunFromMemory
 
         private void buttonLoadExeFromWeb_Click(object sender, EventArgs e)
         {
+            string exeurl = "https://github.com/CamPro/RunFromMemory/raw/main/RunFromMemory/ExeTest/bin/Release/ExeTest.exe";
+            MemoryStream ms = new MemoryStream();
+            //Access web and read the bytes from the binary file
+            ms = new MemoryStream(client.DownloadData(exeurl));
+            BinaryReader br = new BinaryReader(ms);
+            byte[] bin = br.ReadBytes(Convert.ToInt32(ms.Length));
+            ms.Close();
+            br.Close();
 
+            Assembly a = Assembly.Load(bin);
+            MethodInfo m = a.EntryPoint;
+            object o = a.CreateInstance(m.Name);
+            m.Invoke(o, null);
         }
 
         private void buttonLoadDllFromLocal_Click(object sender, EventArgs e)
@@ -83,30 +95,30 @@ namespace RunFromMemory
 
         private void buttonLoadExeFromLocal_Click(object sender, EventArgs e)
         {
+            string exepath = "..\\..\\..\\ExeTest\\bin\\Release\\ExeTest.exe";
+            exepath = Path.GetFullPath(exepath);
 
+            Assembly a = Assembly.LoadFile(exepath);
+
+            Type programType = a.GetTypes().FirstOrDefault(c => c.Name == "Program");
+            MethodInfo method = programType.GetMethod("Start", BindingFlags.Public | BindingFlags.Static);
+            method.Invoke(null, new object[] { });
         }
 
-        public static void loadAssembly(byte[] bin)
+        private void buttonLoadExeNoFormLocal_Click(object sender, EventArgs e)
         {
-            // First load the assembly
+            string exepath = "..\\..\\..\\ExeNoFormTest\\bin\\Release\\ExeNoFormTest.exe";
+            exepath = Path.GetFullPath(exepath);
+
+            FileStream fs = new FileStream(exepath, FileMode.Open);
+            BinaryReader br = new BinaryReader(fs);
+            byte[] bin = br.ReadBytes(Convert.ToInt32(fs.Length));
+            fs.Close();
+            br.Close();
+
             Assembly a = Assembly.Load(bin);
-
-            // Get the type that includes the method you want to call by name (must include namespace and class name)
-            Type class1Typetype = a.GetType("DllTest.UserControl1");
-
-            // Since your method is not static you must create an instance of that class.
-            // The following line will create an instance using the default parameterless constructor.
-            // If the class does not have a parameterless constructor, the following line will faile
-            object class1Instance = Activator.CreateInstance(class1Typetype);
-
-            // Find the method you want to call by name
-            // If there are multiple overloads, use the GetMethod overload that allows specifying parameter types
-            MethodInfo method = class1Typetype.GetMethod("RunTestDll");
-
-            // Use method.Invoke to call the method and pass the parameters in an array, cast the result to int
-            //var result = (int)method.Invoke(class1Instance, new object[] { null, null });
-            object[] args = new object[] { null, null };
-            object result = method.Invoke(class1Instance, args);
+            MethodInfo m = a.EntryPoint;
+            a.EntryPoint.Invoke(null, new object[] { });
         }
     }
 }

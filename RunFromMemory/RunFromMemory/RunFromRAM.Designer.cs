@@ -34,9 +34,10 @@ namespace RunFromMemory
             this.buttonLoadExeFromLocal = new System.Windows.Forms.Button();
             this.buttonLoadDllFromLocal = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonLoadStaticDllFromWeb = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.buttonLoadExeNoFormLocal = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -65,12 +66,12 @@ namespace RunFromMemory
             // 
             // buttonLoadExeFromLocal
             // 
-            this.buttonLoadExeFromLocal.Location = new System.Drawing.Point(18, 195);
+            this.buttonLoadExeFromLocal.Location = new System.Drawing.Point(18, 171);
             this.buttonLoadExeFromLocal.Margin = new System.Windows.Forms.Padding(4);
             this.buttonLoadExeFromLocal.Name = "buttonLoadExeFromLocal";
             this.buttonLoadExeFromLocal.Size = new System.Drawing.Size(250, 50);
             this.buttonLoadExeFromLocal.TabIndex = 3;
-            this.buttonLoadExeFromLocal.Text = "Load and Run EXE from Local";
+            this.buttonLoadExeFromLocal.Text = "Load EXE have form Local";
             this.buttonLoadExeFromLocal.UseVisualStyleBackColor = true;
             this.buttonLoadExeFromLocal.Click += new System.EventHandler(this.buttonLoadExeFromLocal_Click);
             // 
@@ -97,8 +98,20 @@ namespace RunFromMemory
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Load from Web";
             // 
+            // buttonLoadStaticDllFromWeb
+            // 
+            this.buttonLoadStaticDllFromWeb.Location = new System.Drawing.Point(21, 111);
+            this.buttonLoadStaticDllFromWeb.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonLoadStaticDllFromWeb.Name = "buttonLoadStaticDllFromWeb";
+            this.buttonLoadStaticDllFromWeb.Size = new System.Drawing.Size(250, 50);
+            this.buttonLoadStaticDllFromWeb.TabIndex = 2;
+            this.buttonLoadStaticDllFromWeb.Text = "Load and Run Static DLL from Web";
+            this.buttonLoadStaticDllFromWeb.UseVisualStyleBackColor = true;
+            this.buttonLoadStaticDllFromWeb.Click += new System.EventHandler(this.buttonLoadStaticDllFromWeb_Click);
+            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonLoadExeNoFormLocal);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.buttonLoadDllFromLocal);
             this.groupBox2.Controls.Add(this.buttonLoadExeFromLocal);
@@ -109,26 +122,26 @@ namespace RunFromMemory
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Load from Local";
             // 
-            // buttonLoadStaticDllFromWeb
-            // 
-            this.buttonLoadStaticDllFromWeb.Location = new System.Drawing.Point(21, 112);
-            this.buttonLoadStaticDllFromWeb.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonLoadStaticDllFromWeb.Name = "buttonLoadStaticDllFromWeb";
-            this.buttonLoadStaticDllFromWeb.Size = new System.Drawing.Size(250, 50);
-            this.buttonLoadStaticDllFromWeb.TabIndex = 2;
-            this.buttonLoadStaticDllFromWeb.Text = "Load and Run Static DLL from Web";
-            this.buttonLoadStaticDllFromWeb.UseVisualStyleBackColor = true;
-            this.buttonLoadStaticDllFromWeb.Click += new System.EventHandler(this.buttonLoadStaticDllFromWeb_Click);
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(18, 112);
+            this.button2.Location = new System.Drawing.Point(18, 94);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(250, 50);
             this.button2.TabIndex = 4;
             this.button2.Text = "Load and Run Static DLL from Local";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // buttonLoadExeNoFormLocal
+            // 
+            this.buttonLoadExeNoFormLocal.Location = new System.Drawing.Point(18, 229);
+            this.buttonLoadExeNoFormLocal.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonLoadExeNoFormLocal.Name = "buttonLoadExeNoFormLocal";
+            this.buttonLoadExeNoFormLocal.Size = new System.Drawing.Size(250, 50);
+            this.buttonLoadExeNoFormLocal.TabIndex = 5;
+            this.buttonLoadExeNoFormLocal.Text = "Load EXE no form Local";
+            this.buttonLoadExeNoFormLocal.UseVisualStyleBackColor = true;
+            this.buttonLoadExeNoFormLocal.Click += new System.EventHandler(this.buttonLoadExeNoFormLocal_Click);
             // 
             // RunFromRAM
             // 
@@ -158,6 +171,7 @@ namespace RunFromMemory
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button buttonLoadStaticDllFromWeb;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonLoadExeNoFormLocal;
     }
 }
 
