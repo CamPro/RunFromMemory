@@ -45,8 +45,9 @@ namespace RunFromMemory
             Type class1Typetype = a.GetType("DllTest.UserControl1");
             object class1Instance = Activator.CreateInstance(class1Typetype);
             MethodInfo method = class1Typetype.GetMethod("RunTestDll");
-            object[] args = new object[] { null, null };
+            object[] args = new object[] { "hello", "me" };
             object result = method.Invoke(class1Instance, args);
+            MessageBox.Show(result.ToString());
         }
 
         private void buttonLoadStaticDllFromWeb_Click(object sender, EventArgs e)

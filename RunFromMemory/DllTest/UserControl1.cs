@@ -28,7 +28,7 @@ namespace DllTest
         public string RunTestDll(string a, string b)
         {
             MessageBox.Show("Dll start OK");
-            return "OK 1a";
+            return $"OK {a},{b}";
         }
 
         public static string RunTestStaticDll()
